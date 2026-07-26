@@ -1,5 +1,7 @@
 # Plan, Build, Review
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 A role-based Codex skill for delivering meaningful milestones through
 independent review, explicit approval, and task-level checkpoints.
 
