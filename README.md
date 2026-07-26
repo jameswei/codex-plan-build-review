@@ -1,45 +1,35 @@
 # Codex Plan, Build, Review
 
-A gated, role-based Codex workflow for independently reviewed milestone
-delivery.
+A role-based Codex skill for delivering meaningful milestones through
+independent review, explicit approval, and task-level checkpoints.
 
-This skill separates planning, implementation, and review into focused Codex
-agents while keeping the user and main agent in control of scope and approval
-gates.
+## Why use it
 
-## What it does
+- A planner creates an evidence-grounded plan; a separate reviewer must pass it.
+- Nothing is implemented before explicit user approval.
+- Work proceeds one task at a time through build, validation, review, and
+  checkpoint commit.
+- Every review pass uses a fresh reviewer to reduce builder-reviewer drift.
+- A final integration review checks cumulative behavior and cross-task
+  contracts.
+- Publication requires explicit approval, and the workflow never merges
+  automatically.
 
-The workflow moves a meaningful milestone through:
+```text
+preflight → plan → review → approve → build task → review task → checkpoint
+          → repeat → integration review → publication approval
+```
 
-1. repository preflight and evidence gathering;
-2. independent milestone planning and plan review;
-3. explicit user approval;
-4. task-by-task implementation and review checkpoints;
-5. final cross-task integration review; and
-6. explicit approval before publication.
+## Roles
 
-Later tasks cannot begin until the current task has passed validation, received
-an independent review, and been committed as a stable checkpoint.
-
-## Codex roles
-
-| Role | Purpose | Default model | Reasoning effort |
+| Role | Responsibility | Access | Model and effort |
 | --- | --- | --- | --- |
-| `milestone-explorer` | Bounded, read-heavy investigation | `gpt-5.6-terra` | `medium` |
-| `milestone-planner` | Evidence-grounded milestone planning | `gpt-5.6-sol` | `xhigh` |
-| `milestone-builder` | One approved implementation task | `gpt-5.6-sol` | `medium` |
-| `milestone-reviewer` | Independent plan, task, and integration review | `gpt-5.6-sol` | `high` |
+| `milestone-explorer` | Bounded investigation | Read only | Terra, medium |
+| `milestone-planner` | Decision-complete milestone plan | Read only | Sol, xhigh |
+| `milestone-builder` | One approved task | Workspace write | Sol, medium |
+| `milestone-reviewer` | Plan, task, and integration review | Read only | Sol, high |
 
-The builder deliberately uses medium reasoning because it receives one bounded,
-reviewed task at a time. Higher-effort reviewers and validation gates provide
-independent checks around implementation.
-
-## Compatibility
-
-This repository is designed specifically for Codex. The workflow principles
-can be adapted elsewhere, but the packaged skill relies on Codex skills, named
-custom agents, sandbox settings, reasoning-effort configuration, and subagent
-context controls.
+The role definitions are bundled and can be tuned for your Codex environment.
 
 ## Install
 
@@ -74,24 +64,15 @@ The workflow stops after the reviewed plan and waits for approval before it
 creates a branch or edits implementation files. It also asks again before
 pushing or opening a draft pull request.
 
-## Repository structure
+Use it for milestone work where scope, correctness, and review traceability
+matter. It intentionally does not trigger for ordinary coding or documentation
+tasks.
 
-```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-└── assets/
-    └── agents/
-        ├── milestone-builder.toml
-        ├── milestone-explorer.toml
-        ├── milestone-planner.toml
-        └── milestone-reviewer.toml
-```
+## Compatibility
 
-`SKILL.md` defines the workflow. `agents/openai.yaml` provides skill UI
-metadata. The TOML files under `assets/agents/` are installed separately as
-Codex custom agents.
+This package is Codex-specific. Its workflow principles are portable, but its
+skill metadata, custom agents, sandbox settings, reasoning controls, and
+subagent context handling rely on Codex.
 
 ## License
 
