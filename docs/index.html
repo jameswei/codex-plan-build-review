@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101417">
+    <meta
+      name="description"
+      content="A role-based Codex skill for independently reviewed plans, task-by-task delivery, and explicit approval checkpoints."
+    >
+    <title>Plan, Build, Review — A role-based Codex workflow</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Plan, Build, Review home">
+        <span class="brand-mark" aria-hidden="true">PBR</span>
+        <span>Plan, Build, Review</span>
+      </a>
+      <a
+        class="header-link"
+        href="https://github.com/jameswei/codex-plan-build-review"
+      >GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A role-based workflow for Codex</p>
+          <h1>Ship meaningful milestones with evidence, not guesswork.</h1>
+          <p class="hero-summary">
+            Separate planning, implementation, and review. Keep every scope
+            decision visible, every task independently checked, and every
+            publication under your control.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href="https://github.com/jameswei/codex-plan-build-review"
+            >View on GitHub</a>
+            <a class="button button-secondary" href="#install">Install the skill</a>
+          </div>
+        </div>
+
+        <div class="workflow-card" aria-label="Milestone workflow">
+          <p class="card-label">Milestone path</p>
+          <ol class="workflow-list">
+            <li><span>01</span><strong>Plan</strong><small>Ground the work in repository evidence.</small></li>
+            <li><span>02</span><strong>Review</strong><small>Pass an independent plan review.</small></li>
+            <li><span>03</span><strong>Approve</strong><small>Stop for an explicit user decision.</small></li>
+            <li><span>04</span><strong>Build</strong><small>Implement one bounded task at a time.</small></li>
+            <li><span>05</span><strong>Verify</strong><small>Review, validate, and checkpoint every task.</small></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="Workflow guarantees">
+        <p><strong>4</strong><span>focused roles</span></p>
+        <p><strong>2</strong><span>explicit approval gates</span></p>
+        <p><strong>1</strong><span>task in progress</span></p>
+        <p><strong>0</strong><span>automatic merges</span></p>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Deliberate separation</p>
+          <h2>One workflow. Four focused roles.</h2>
+          <p>
+            Each agent gets a narrow responsibility and the access needed to
+            perform it—no more.
+          </p>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card">
+            <div class="role-index">01</div>
+            <h3>Explorer</h3>
+            <p>Runs bounded, read-heavy investigations before planning.</p>
+            <div class="role-meta"><span>Read only</span><span>Terra · medium</span></div>
+          </article>
+          <article class="role-card featured">
+            <div class="role-index">02</div>
+            <h3>Planner</h3>
+            <p>Turns intent and repository evidence into a decision-complete plan.</p>
+            <div class="role-meta"><span>Read only</span><span>Sol · xhigh</span></div>
+          </article>
+          <article class="role-card">
+            <div class="role-index">03</div>
+            <h3>Builder</h3>
+            <p>Implements exactly one approved, reviewable task at a time.</p>
+            <div class="role-meta"><span>Workspace write</span><span>Sol · medium</span></div>
+          </article>
+          <article class="role-card">
+            <div class="role-index">04</div>
+            <h3>Reviewer</h3>
+            <p>Independently checks plans, task deltas, and final integration.</p>
+            <div class="role-meta"><span>Read only</span><span>Sol · high</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section safeguards">
+        <div class="section-heading">
+          <p class="eyebrow">Built-in safeguards</p>
+          <h2>Progress stays inspectable.</h2>
+        </div>
+        <div class="safeguard-grid">
+          <article>
+            <span class="safeguard-number">A</span>
+            <h3>Review before approval</h3>
+            <p>The user sees a plan only after an independent reviewer passes it.</p>
+          </article>
+          <article>
+            <span class="safeguard-number">B</span>
+            <h3>Checkpoint every task</h3>
+            <p>No later task starts until the current delta is validated, reviewed, and committed.</p>
+          </article>
+          <article>
+            <span class="safeguard-number">C</span>
+            <h3>Integrate before publishing</h3>
+            <p>A final review checks cross-task contracts before publication approval.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="install-section" id="install">
+        <div>
+          <p class="eyebrow">Ready when you are</p>
+          <h2>Install once. Invoke explicitly.</h2>
+          <p>
+            Clone the skill, install its role definitions, then start a new
+            Codex session.
+          </p>
+        </div>
+        <div class="code-panel">
+          <pre><code>git clone https://github.com/jameswei/codex-plan-build-review.git \
+  ~/.codex/skills/plan-build-review
+
+mkdir -p ~/.codex/agents
+cp ~/.codex/skills/plan-build-review/assets/agents/*.toml \
+  ~/.codex/agents/</code></pre>
+          <p><span aria-hidden="true">$</span> Use <strong>$plan-build-review</strong> to deliver this milestone.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Plan, Build, Review <span>·</span> MIT licensed</p>
+      <a href="https://github.com/jameswei/codex-plan-build-review">Source on GitHub</a>
+    </footer>
+  </body>
+</html>

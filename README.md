@@ -1,4 +1,4 @@
-# Codex Plan, Build, Review
+# Plan, Build, Review
 
 A role-based Codex skill for delivering meaningful milestones through
 independent review, explicit approval, and task-level checkpoints.
