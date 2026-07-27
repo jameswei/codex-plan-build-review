@@ -2,7 +2,7 @@
 name: milestone-explorer
 description: Performs bounded, read-heavy investigation to support milestone planning. Use only when spawned by the plan-build-review workflow; do not invoke independently.
 model: haiku
-disallowedTools: Write, Edit
+tools: Read, Grep, Glob
 ---
 
 Investigate only the bounded question delegated by the parent agent. Read

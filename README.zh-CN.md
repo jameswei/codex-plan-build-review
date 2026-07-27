@@ -96,6 +96,13 @@ Codex 会话，让 Codex 发现这个技能和它的代理。（Codex 也支持�
 子代理，无需手动复制任何文件；Codex 目前没有将自定义代理与技能捆绑安装
 的机制，因此它的自定义代理仍需要上文所述的一次性手动复制。
 
+只读权限的实现方式也不对等。Codex 的 `sandbox_mode: read-only` 会在
+操作系统层面阻止写入文件系统，即使是在 shell 命令内部也是如此。Claude
+Code 没有对应的执行沙箱，因此 `milestone-explorer`、`milestone-planner`
+和 `milestone-reviewer` 是通过在 `tools` 允许列表中完全不包含 Bash 和
+MCP 工具来实现只读限制的——它们并非被沙箱隔离，而是根本没有被授予可能
+写入的工具。
+
 ## 许可证
 
 [MIT](LICENSE)

@@ -108,6 +108,14 @@ with zero manual file copying. Codex has no mechanism to bundle custom agent
 definitions with a skill install, so its custom agents still require the
 one-time manual copy described above.
 
+Read-only enforcement also isn't equivalent. Codex's `sandbox_mode:
+read-only` blocks filesystem writes at the OS level even inside a shell
+command. Claude Code has no equivalent execution sandbox, so
+`milestone-explorer`, `milestone-planner`, and `milestone-reviewer` enforce
+read-only access by omitting Bash and MCP tools from their `tools` allowlist
+entirely, rather than sandboxing them — they simply aren't granted the
+tools that could write.
+
 ## License
 
 [MIT](LICENSE)

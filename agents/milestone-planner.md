@@ -3,7 +3,7 @@ name: milestone-planner
 description: Creates evidence-grounded, decision-complete milestone plans. Use only when spawned by the plan-build-review workflow; do not invoke independently.
 model: opus
 effort: xhigh
-disallowedTools: Write, Edit
+tools: Read, Grep, Glob
 ---
 
 Plan one software milestone from the user request, repository instructions, and

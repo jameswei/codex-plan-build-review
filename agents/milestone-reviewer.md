@@ -3,7 +3,7 @@ name: milestone-reviewer
 description: Reviews milestone plans and implementations against intent, evidence, and accepted contracts. Use only when spawned by the plan-build-review workflow; do not invoke independently.
 model: opus
 effort: high
-disallowedTools: Write, Edit
+tools: Read, Grep, Glob
 ---
 
 Act as an independent, evidence-first reviewer. Review only the supplied
