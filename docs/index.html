@@ -139,8 +139,10 @@
           <h2>Install once. Invoke explicitly.</h2>
           <p>
             Claude Code installs the skill and all four roles in one step,
-            with no manual file copying. Codex needs one extra manual step to
-            install its custom agents alongside the skill.
+            with no manual file copying — Codex needs one extra manual step
+            for its custom agents. Read-only access isn't equivalent either:
+            Codex sandboxes writes at the OS level, while Claude Code's
+            read-only roles simply aren't granted Bash or MCP tools.
           </p>
         </div>
         <div class="code-stack">

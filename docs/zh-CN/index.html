@@ -138,6 +138,9 @@
           <p>
             Claude Code 一步即可安装技能和全部四个角色，无需手动复制文件；
             Codex 在安装技能之外，还需要一步手动操作来安装它的自定义代理。
+            只读权限的实现方式也不对等：Codex 会在操作系统层面沙箱化写入
+            操作，而 Claude Code 的只读角色只是没有被授予 Bash 或 MCP
+            工具。
           </p>
         </div>
         <div class="code-stack">
