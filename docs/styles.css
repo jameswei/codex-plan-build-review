@@ -433,6 +433,16 @@ h3 {
   color: #546066;
 }
 
+.code-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.code-stack .card-label {
+  padding-bottom: 8px;
+}
+
 .code-panel {
   overflow: hidden;
   border: 1px solid rgba(23, 33, 38, 0.22);

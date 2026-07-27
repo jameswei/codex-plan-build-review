@@ -2,8 +2,9 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-一个基于角色分工的 Codex 技能，通过独立审查、明确批准和任务级检查点，
-可靠地交付重要里程碑。
+一个基于角色分工的工作流，通过独立审查、明确批准和任务级检查点，可靠地
+交付重要里程碑 —— 同时支持 [Codex](https://developers.openai.com/codex/) 和
+[Claude Code](https://code.claude.com/)。
 
 ## 为什么使用它
 
@@ -21,21 +22,24 @@
 
 ## 角色
 
-| 角色 | 职责 | 权限 | 模型与推理强度 |
-| --- | --- | --- | --- |
-| `milestone-explorer` | 范围明确的调查 | 只读 | Terra，medium |
-| `milestone-planner` | 制定决策完整的里程碑计划 | 只读 | Sol，xhigh |
-| `milestone-builder` | 实现一项已批准的任务 | 工作区写入 | Sol，medium |
-| `milestone-reviewer` | 审查计划、任务和最终集成 | 只读 | Sol，high |
+| 角色 | 职责 | 权限 | Codex 模型 · 推理强度 | Claude 模型 · 推理强度 |
+| --- | --- | --- | --- | --- |
+| `milestone-explorer` | 范围明确的调查 | 只读 | Terra · medium | Haiku |
+| `milestone-planner` | 制定决策完整的里程碑计划 | 只读 | Sol · xhigh | Opus · xhigh |
+| `milestone-builder` | 实现一项已批准的任务 | 工作区写入 | Sol · medium | Sonnet · high |
+| `milestone-reviewer` | 审查计划、任务和最终集成 | 只读 | Sol · high | Opus · high |
 
-角色定义已随仓库提供，可以根据你的 Codex 环境进行调整。
+角色定义已随仓库提供，可以根据任一运行环境进行调整。Haiku 不支持可配置的
+推理强度等级，因此 `milestone-explorer` 对应的 Claude 一栏留空。
 
 ## 安装
+
+### Codex
 
 使用技能内部名称，将仓库克隆到 Codex 技能目录：
 
 ```sh
-git clone https://github.com/jameswei/codex-plan-build-review.git \
+git clone https://github.com/jameswei/plan-build-review.git \
   ~/.codex/skills/plan-build-review
 ```
 
@@ -47,14 +51,36 @@ cp ~/.codex/skills/plan-build-review/assets/agents/*.toml ~/.codex/agents/
 ```
 
 如果已经存在同名代理，请在复制前检查现有文件。安装完成后启动新的
-Codex 会话，让 Codex 发现这个技能和它的代理。
+Codex 会话，让 Codex 发现这个技能和它的代理。（Codex 也支持项目级的
+`.agents/skills` 目录，作为上面用户级 `~/.codex/skills/` 路径之外的
+另一种安装位置。）
+
+### Claude Code
+
+将此仓库添加为插件市场，然后安装插件：
+
+```text
+/plugin marketplace add jameswei/plan-build-review
+/plugin install plan-build-review@plan-build-review
+/reload-plugins
+```
+
+这一步会同时安装技能和全部四个子代理定义，无需手动复制任何文件。安装后，
+技能和角色会带上插件名作为命名空间前缀，例如 `milestone-planner` 会变成
+`plan-build-review:milestone-planner`。
 
 ## 使用
 
-明确调用这个技能：
+在 Codex 中，明确调用这个技能：
 
 ```text
 使用 $plan-build-review 为此仓库交付 v1.0 里程碑。
+```
+
+在 Claude Code 中：
+
+```text
+使用 /plan-build-review:plan-build-review 为此仓库交付 v1.0 里程碑。
 ```
 
 工作流会在计划通过审查后暂停，等待你的批准，然后才会创建分支或修改实现
@@ -65,8 +91,10 @@ Codex 会话，让 Codex 发现这个技能和它的代理。
 
 ## 兼容性
 
-这个软件包专为 Codex 设计。工作流原则可以迁移到其他环境，但技能元数据、
-自定义代理、沙箱设置、推理强度配置和子代理上下文控制都依赖 Codex。
+这个软件包同时支持 Codex 和 Claude Code，不面向其他运行环境。但两边的
+安装体验并不完全对等：Claude Code 的插件市场可以一步安装技能和全部四个
+子代理，无需手动复制任何文件；Codex 目前没有将自定义代理与技能捆绑安装
+的机制，因此它的自定义代理仍需要上文所述的一次性手动复制。
 
 ## 许可证
 

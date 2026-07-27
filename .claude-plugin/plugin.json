@@ -1,0 +1,11 @@
+{
+  "name": "plan-build-review",
+  "displayName": "Plan, Build, Review",
+  "version": "1.0.0",
+  "description": "A gated, role-based workflow for delivering milestones through independent plan review, explicit approval, and task-level build/review checkpoints.",
+  "author": { "name": "Jia Wei", "url": "https://github.com/jameswei" },
+  "homepage": "https://lifeplayer.space/plan-build-review/",
+  "repository": "https://github.com/jameswei/plan-build-review",
+  "license": "MIT",
+  "keywords": ["workflow", "planning", "code-review", "milestone", "multi-agent"]
+}

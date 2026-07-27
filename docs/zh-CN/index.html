@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#f6f2e8">
     <meta
       name="description"
-      content="一个基于角色分工的 Codex 技能，通过独立审查、逐任务交付和明确批准关口，可靠地推进软件里程碑。"
+      content="一个面向 Codex 和 Claude Code 的角色化工作流，通过独立审查、逐任务交付和明确批准关口，可靠地推进软件里程碑。"
     >
-    <title>Plan, Build, Review — 基于角色分工的 Codex 工作流</title>
-    <link rel="canonical" href="https://lifeplayer.space/codex-plan-build-review/zh-CN/">
-    <link rel="alternate" hreflang="en" href="https://lifeplayer.space/codex-plan-build-review/">
-    <link rel="alternate" hreflang="zh-CN" href="https://lifeplayer.space/codex-plan-build-review/zh-CN/">
-    <link rel="alternate" hreflang="x-default" href="https://lifeplayer.space/codex-plan-build-review/">
+    <title>Plan, Build, Review — 面向 Codex 和 Claude Code 的角色化工作流</title>
+    <link rel="canonical" href="https://lifeplayer.space/plan-build-review/zh-CN/">
+    <link rel="alternate" hreflang="en" href="https://lifeplayer.space/plan-build-review/">
+    <link rel="alternate" hreflang="zh-CN" href="https://lifeplayer.space/plan-build-review/zh-CN/">
+    <link rel="alternate" hreflang="x-default" href="https://lifeplayer.space/plan-build-review/">
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
@@ -28,7 +28,7 @@
         </div>
         <a
           class="header-link"
-          href="https://github.com/jameswei/codex-plan-build-review"
+          href="https://github.com/jameswei/plan-build-review"
         >GitHub <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -36,7 +36,7 @@
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">面向 Codex 的角色化工作流</p>
+          <p class="eyebrow">面向 Codex 和 Claude Code 的角色化工作流</p>
           <h1>用证据推进重要里程碑，而不是依靠猜测。</h1>
           <p class="hero-summary">
             将规划、实现与审查分离。让每个范围决策都清晰可见，每项任务都经过独立检查，
@@ -45,7 +45,7 @@
           <div class="hero-actions">
             <a
               class="button button-primary"
-              href="https://github.com/jameswei/codex-plan-build-review"
+              href="https://github.com/jameswei/plan-build-review"
             >在 GitHub 上查看</a>
             <a class="button button-secondary" href="#install">安装技能</a>
           </div>
@@ -84,25 +84,25 @@
             <div class="role-index">01</div>
             <h3>探索者</h3>
             <p>在规划前执行范围明确、以只读为主的调查。</p>
-            <div class="role-meta"><span>只读</span><span>Terra · medium</span></div>
+            <div class="role-meta"><span>只读</span><span>Codex：Terra · medium</span><span>Claude：Haiku</span></div>
           </article>
           <article class="role-card featured">
             <div class="role-index">02</div>
             <h3>规划者</h3>
             <p>把用户意图和仓库证据整理成决策完整的计划。</p>
-            <div class="role-meta"><span>只读</span><span>Sol · xhigh</span></div>
+            <div class="role-meta"><span>只读</span><span>Codex：Sol · xhigh</span><span>Claude：Opus · xhigh</span></div>
           </article>
           <article class="role-card">
             <div class="role-index">03</div>
             <h3>构建者</h3>
             <p>每次只实现一项已批准、可独立审查的任务。</p>
-            <div class="role-meta"><span>工作区写入</span><span>Sol · medium</span></div>
+            <div class="role-meta"><span>工作区写入</span><span>Codex：Sol · medium</span><span>Claude：Sonnet · high</span></div>
           </article>
           <article class="role-card">
             <div class="role-index">04</div>
             <h3>审查者</h3>
             <p>独立检查计划、任务变更和最终集成结果。</p>
-            <div class="role-meta"><span>只读</span><span>Sol · high</span></div>
+            <div class="role-meta"><span>只读</span><span>Codex：Sol · high</span><span>Claude：Opus · high</span></div>
           </article>
         </div>
       </section>
@@ -136,24 +136,35 @@
           <p class="eyebrow">随时可以开始</p>
           <h2>安装一次，明确调用。</h2>
           <p>
-            克隆技能并安装它的角色定义，然后启动一个新的 Codex 会话。
+            Claude Code 一步即可安装技能和全部四个角色，无需手动复制文件；
+            Codex 在安装技能之外，还需要一步手动操作来安装它的自定义代理。
           </p>
         </div>
-        <div class="code-panel">
-          <pre><code>git clone https://github.com/jameswei/codex-plan-build-review.git \
+        <div class="code-stack">
+          <p class="card-label">Codex</p>
+          <div class="code-panel">
+            <pre><code>git clone https://github.com/jameswei/plan-build-review.git \
   ~/.codex/skills/plan-build-review
 
 mkdir -p ~/.codex/agents
 cp ~/.codex/skills/plan-build-review/assets/agents/*.toml \
   ~/.codex/agents/</code></pre>
-          <p><span aria-hidden="true">$</span> 使用 <strong>$plan-build-review</strong> 交付这个里程碑。</p>
+            <p><span aria-hidden="true">$</span> 使用 <strong>$plan-build-review</strong> 交付这个里程碑。</p>
+          </div>
+          <p class="card-label">Claude Code</p>
+          <div class="code-panel">
+            <pre><code>/plugin marketplace add jameswei/plan-build-review
+/plugin install plan-build-review@plan-build-review
+/reload-plugins</code></pre>
+            <p><span aria-hidden="true">$</span> 使用 <strong>/plan-build-review:plan-build-review</strong> 交付这个里程碑。</p>
+          </div>
         </div>
       </section>
     </main>
 
     <footer>
       <p>Plan, Build, Review <span>·</span> MIT 开源许可</p>
-      <a href="https://github.com/jameswei/codex-plan-build-review">GitHub 源码</a>
+      <a href="https://github.com/jameswei/plan-build-review">GitHub 源码</a>
     </footer>
   </body>
 </html>

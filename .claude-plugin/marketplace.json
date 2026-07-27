@@ -1,0 +1,12 @@
+{
+  "name": "plan-build-review",
+  "owner": { "name": "Jia Wei", "url": "https://github.com/jameswei" },
+  "description": "Self-hosted marketplace for the Plan, Build, Review workflow skill.",
+  "plugins": [
+    {
+      "name": "plan-build-review",
+      "source": "./",
+      "description": "A gated, role-based workflow for delivering milestones through independent plan review, explicit approval, and task-level build/review checkpoints."
+    }
+  ]
+}
