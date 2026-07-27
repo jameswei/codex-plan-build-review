@@ -1,6 +1,6 @@
 ---
 name: plan-build-review
-description: Plan and execute explicitly requested milestone work through independent plan review, user approval, task-level build and review checkpoints, integration review, and controlled publication. Use only when the user invokes $plan-build-review or explicitly requests this workflow; do not invoke it for ordinary coding, review, or documentation tasks.
+description: Plan and execute explicitly requested milestone work through independent plan review, user approval, task-level build and review checkpoints, integration review, and controlled publication. Use only when the user explicitly invokes this skill by name (for example, $plan-build-review in Codex or /plan-build-review:plan-build-review in Claude Code) or clearly asks for this workflow in other words; do not invoke it for ordinary coding, review, or documentation tasks.
 ---
 
 # Plan, Build, Review
@@ -8,8 +8,14 @@ description: Plan and execute explicitly requested milestone work through indepe
 Coordinate milestone work without mixing planning, implementation, and review.
 The main agent owns scope, sequencing, user communication, and approval gates.
 
-Spawn named agents with `fork_turns="none"`. Pass a self-contained task packet;
-do not rely on parent conversation history.
+Spawn every named role with a fresh, isolated context and a self-contained
+task packet.
+
+- In Codex, always call `spawn_agent` with `fork_turns="none"` — the default
+  is `fork_turns="all"`, which inherits the entire parent conversation.
+- In Claude Code, use a normal non-fork custom subagent invocation.
+
+Do not rely on or inherit parent conversation history.
 
 ## 1. Preflight
 
