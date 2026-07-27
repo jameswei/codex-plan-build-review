@@ -8,8 +8,14 @@ description: Plan and execute explicitly requested milestone work through indepe
 Coordinate milestone work without mixing planning, implementation, and review.
 The main agent owns scope, sequencing, user communication, and approval gates.
 
-Spawn named agents fresh, with no inherited conversation history. Pass a
-self-contained task packet; do not rely on parent conversation history.
+Spawn every named role with a fresh, isolated context and a self-contained
+task packet.
+
+- In Codex, always call `spawn_agent` with `fork_turns="none"` — the default
+  is `fork_turns="all"`, which inherits the entire parent conversation.
+- In Claude Code, use a normal non-fork custom subagent invocation.
+
+Do not rely on or inherit parent conversation history.
 
 ## 1. Preflight
 
