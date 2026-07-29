@@ -37,11 +37,11 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">A role-based workflow for Codex and Claude Code</p>
-          <h1>Ship meaningful milestones with evidence, not guesswork.</h1>
+          <h1>Ship scoped work with evidence, not guesswork.</h1>
           <p class="hero-summary">
-            Separate planning, implementation, and review. Keep every scope
-            decision visible, every task independently checked, and every
-            publication under your control.
+            Separate planning, implementation, and review. Challenge the
+            premise before refining the plan. Keep every task independently
+            checked and every publication under your control.
           </p>
           <div class="hero-actions">
             <a
@@ -52,8 +52,8 @@
           </div>
         </div>
 
-        <div class="workflow-card" aria-label="Milestone workflow">
-          <p class="card-label">Milestone path</p>
+        <div class="workflow-card" aria-label="Scoped-work workflow">
+          <p class="card-label">Work path</p>
           <ol class="workflow-list">
             <li><span>01</span><strong>Plan</strong><small>Ground the work in repository evidence.</small></li>
             <li><span>02</span><strong>Review</strong><small>Pass an independent plan review.</small></li>
@@ -86,27 +86,24 @@
             <div class="role-index">01</div>
             <h3>Explorer</h3>
             <p>Runs bounded, read-heavy investigations before planning.</p>
-            <div class="role-meta"><span>Read only</span><span>Codex: Terra · medium</span><span>Claude: Haiku</span></div>
           </article>
           <article class="role-card featured">
             <div class="role-index">02</div>
             <h3>Planner</h3>
-            <p>Turns intent and repository evidence into a decision-complete plan.</p>
-            <div class="role-meta"><span>Read only</span><span>Codex: Sol · xhigh</span><span>Claude: Opus · xhigh</span></div>
+            <p>Turns intent and repository evidence into a minimal, decision-complete plan.</p>
           </article>
           <article class="role-card">
             <div class="role-index">03</div>
             <h3>Builder</h3>
             <p>Implements exactly one approved, reviewable task at a time.</p>
-            <div class="role-meta"><span>Workspace write</span><span>Codex: Sol · medium</span><span>Claude: Sonnet · high</span></div>
           </article>
           <article class="role-card">
             <div class="role-index">04</div>
             <h3>Reviewer</h3>
-            <p>Independently checks plans, task deltas, and final integration.</p>
-            <div class="role-meta"><span>Read only</span><span>Codex: Sol · high</span><span>Claude: Opus · high</span></div>
+            <p>Challenges premises, then checks plans, task deltas, and final integration.</p>
           </article>
         </div>
+        <p class="role-capability">Each role has a purpose-matched model and reasoning-effort assignment. See the README for runtime-specific details.</p>
       </section>
 
       <section class="section safeguards">
@@ -117,13 +114,13 @@
         <div class="safeguard-grid">
           <article>
             <span class="safeguard-number">A</span>
-            <h3>Review before approval</h3>
-            <p>The user sees a plan only after an independent reviewer passes it.</p>
+            <h3>Challenge before approval</h3>
+            <p>The reviewer must pass both the plan premise and its specification.</p>
           </article>
           <article>
             <span class="safeguard-number">B</span>
-            <h3>Checkpoint every task</h3>
-            <p>No later task starts until the current delta is validated, reviewed, and committed.</p>
+            <h3>Checkpoint complete behavior</h3>
+            <p>No later task starts until the current change is independently correct, validated, reviewed, and committed.</p>
           </article>
           <article>
             <span class="safeguard-number">C</span>
@@ -154,14 +151,14 @@
 mkdir -p ~/.codex/agents
 cp ~/.codex/skills/plan-build-review/assets/agents/*.toml \
   ~/.codex/agents/</code></pre>
-            <p><span aria-hidden="true">$</span> Use <strong>$plan-build-review</strong> to deliver this milestone.</p>
+            <p><span aria-hidden="true">$</span> Use <strong>$plan-build-review</strong> to deliver this feature or milestone.</p>
           </div>
           <p class="card-label">Claude Code</p>
           <div class="code-panel">
             <pre><code>/plugin marketplace add jameswei/plan-build-review
 /plugin install plan-build-review@plan-build-review
 /reload-plugins</code></pre>
-            <p><span aria-hidden="true">$</span> Use <strong>/plan-build-review:plan-build-review</strong> to deliver this milestone.</p>
+            <p><span aria-hidden="true">$</span> Use <strong>/plan-build-review:plan-build-review</strong> to deliver this feature or milestone.</p>
           </div>
         </div>
       </section>

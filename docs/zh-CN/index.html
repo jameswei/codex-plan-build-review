@@ -37,9 +37,9 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">面向 Codex 和 Claude Code 的角色化工作流</p>
-          <h1>用证据推进重要里程碑，而不是依靠猜测。</h1>
+          <h1>用证据推进边界明确的工作，而不是依靠猜测。</h1>
           <p class="hero-summary">
-            将规划、实现与审查分离。让每个范围决策都清晰可见，每项任务都经过独立检查，
+            将规划、实现与审查分离。在细化计划前挑战其前提，让每项任务都经过独立检查，
             并由你掌控每一次发布。
           </p>
           <div class="hero-actions">
@@ -51,8 +51,8 @@
           </div>
         </div>
 
-        <div class="workflow-card" aria-label="里程碑工作流">
-          <p class="card-label">里程碑路径</p>
+        <div class="workflow-card" aria-label="边界明确的工作流">
+          <p class="card-label">工作路径</p>
           <ol class="workflow-list">
             <li><span>01</span><strong>规划</strong><small>以仓库中的真实证据为基础。</small></li>
             <li><span>02</span><strong>审查</strong><small>通过独立的计划审查。</small></li>
@@ -84,27 +84,24 @@
             <div class="role-index">01</div>
             <h3>探索者</h3>
             <p>在规划前执行范围明确、以只读为主的调查。</p>
-            <div class="role-meta"><span>只读</span><span>Codex：Terra · medium</span><span>Claude：Haiku</span></div>
           </article>
           <article class="role-card featured">
             <div class="role-index">02</div>
             <h3>规划者</h3>
-            <p>把用户意图和仓库证据整理成决策完整的计划。</p>
-            <div class="role-meta"><span>只读</span><span>Codex：Sol · xhigh</span><span>Claude：Opus · xhigh</span></div>
+            <p>把用户意图和仓库证据整理成最小而决策完整的计划。</p>
           </article>
           <article class="role-card">
             <div class="role-index">03</div>
             <h3>构建者</h3>
             <p>每次只实现一项已批准、可独立审查的任务。</p>
-            <div class="role-meta"><span>工作区写入</span><span>Codex：Sol · medium</span><span>Claude：Sonnet · high</span></div>
           </article>
           <article class="role-card">
             <div class="role-index">04</div>
             <h3>审查者</h3>
-            <p>独立检查计划、任务变更和最终集成结果。</p>
-            <div class="role-meta"><span>只读</span><span>Codex：Sol · high</span><span>Claude：Opus · high</span></div>
+            <p>先挑战前提，再独立检查计划、任务变更和最终集成结果。</p>
           </article>
         </div>
+        <p class="role-capability">每个角色都有与职责匹配的 model 和 reasoning effort 配置。请在 README 中查看不同 runtime 的具体配置。</p>
       </section>
 
       <section class="section safeguards">
@@ -115,13 +112,13 @@
         <div class="safeguard-grid">
           <article>
             <span class="safeguard-number">A</span>
-            <h3>批准前先审查</h3>
-            <p>只有独立审查者通过计划后，用户才会看到并决定是否批准。</p>
+            <h3>批准前挑战</h3>
+            <p>审查者必须同时通过计划前提和规格，计划才可进入批准阶段。</p>
           </article>
           <article>
             <span class="safeguard-number">B</span>
-            <h3>每项任务都创建检查点</h3>
-            <p>当前变更完成验证、审查和提交之前，不会开始后续任务。</p>
+            <h3>为完整行为创建检查点</h3>
+            <p>当前变更可独立正确，并完成验证、审查和提交前，不会开始后续任务。</p>
           </article>
           <article>
             <span class="safeguard-number">C</span>
@@ -152,14 +149,14 @@
 mkdir -p ~/.codex/agents
 cp ~/.codex/skills/plan-build-review/assets/agents/*.toml \
   ~/.codex/agents/</code></pre>
-            <p><span aria-hidden="true">$</span> 使用 <strong>$plan-build-review</strong> 交付这个里程碑。</p>
+            <p><span aria-hidden="true">$</span> 使用 <strong>$plan-build-review</strong> 交付这个 feature 或 milestone。</p>
           </div>
           <p class="card-label">Claude Code</p>
           <div class="code-panel">
             <pre><code>/plugin marketplace add jameswei/plan-build-review
 /plugin install plan-build-review@plan-build-review
 /reload-plugins</code></pre>
-            <p><span aria-hidden="true">$</span> 使用 <strong>/plan-build-review:plan-build-review</strong> 交付这个里程碑。</p>
+            <p><span aria-hidden="true">$</span> 使用 <strong>/plan-build-review:plan-build-review</strong> 交付这个 feature 或 milestone。</p>
           </div>
         </div>
       </section>
