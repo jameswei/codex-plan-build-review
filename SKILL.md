@@ -20,10 +20,10 @@ or parent conversation.
 
 Do not rely on or inherit parent conversation history. Give each role a short
 decision summary: project purpose, target user and deployment model, owner
-decisions, explicit exclusions, relevant roadmap delta, and the current
-approval or release state. Add only the plan slice and evidence needed for the
-role's assigned judgment. If this summary conflicts with the source plan or
-repository evidence, stop and escalate.
+decisions, superseded requirements, explicit exclusions, relevant roadmap
+delta, and the current approval or release state. Add only the plan slice and
+evidence needed for the role's assigned judgment. If this summary conflicts
+with the source plan or repository evidence, stop and escalate.
 
 ## 1. Preflight
 
@@ -44,23 +44,34 @@ repository evidence, stop and escalate.
    which material requirements come from the owner and which are inferred;
    compare its scope with the roadmap; and explicitly flag any new public
    contract, compatibility promise, deployment model, or security posture for
-   owner decision before the plan can pass.
+   owner decision before the plan can pass. Choose validation by actual
+   consumer. Review human-consumed artifacts against owner intent and
+   change-specific claims without generic structural or semantic policy. Give
+   machine-consumed artifacts proportionate structural and behavioral checks.
+   Give local, PR, main, release, and scheduled validation distinct purposes;
+   justify equivalent coverage.
 3. Reconcile the draft with repository evidence in the main thread.
-4. Spawn a fresh `pbr-reviewer` with the decision summary, relevant
+4. Before hashing or freezing the draft, verify expected encoding and line
+   endings, a final newline, no trailing whitespace, and diff hygiene. Hash
+   only after all checks pass.
+5. Spawn a fresh `pbr-reviewer` with the decision summary, relevant
    evidence, and draft. Require one leading verdict: `PASS`,
    `CHANGES_REQUIRED`, or `BLOCKED`. The reviewer must make two separate
    judgments: a premise review (purpose, user, architecture, deployment,
    compatibility, security, and roadmap delta) and a specification review
    (scope, dependencies, actionability, acceptance, and validation). `PASS`
    requires both judgments to pass.
-5. Return accepted blocking findings to the same planner, then use a fresh
+6. Return accepted blocking findings to the same planner, then use a fresh
    reviewer. Ask the user when a material decision or missing evidence blocks
    planning, or the same blocker survives two review cycles.
-6. Present only a passed plan, its premise summary, assumptions, and
+7. Present only a passed plan, its premise summary, assumptions, and
    non-blocking notes. Stop for explicit user approval.
 
-Do not create a branch, save the plan, or implement before approval. Revisions
-return to planning and require another plan review and approval.
+Do not create a branch, save the plan, or implement before approval. Semantic
+revisions return to full review and approval. A proven byte-only correction may
+use focused independent review: rerun byte-hygiene checks, compute and approve
+a new hash, reuse still-valid evidence, and do not reconstruct history solely
+to make the corrected bytes its first commit.
 
 ## 3. Establish the Approved Work
 
@@ -70,11 +81,15 @@ return to planning and require another plan review and approval.
    milestone, `milestone/<version>-<slug>` and
    `docs/plans/<version>-<slug>.md` remain suitable examples.
 3. Save the approved plan and commit it before implementation.
-4. Create a task ledger from the approved tasks. Track `pending`, `building`,
+4. Keep the plan, task checkpoints, and release-ready documentation inside the
+   semantic work branch and PR. Avoid plan-only, checkpoint-only, or closeout
+   PRs unless independently valuable and mergeable.
+5. Create a task ledger from the approved tasks. Track `pending`, `building`,
    `reviewing`, `accepted`, or `blocked`, plus checkpoint and validation
    evidence.
 
-Keep the approved plan immutable. Record progress in the ledger and commits.
+Keep approved plan bytes immutable except through that byte-only correction
+path. Record progress in the ledger and commits.
 
 ## 4. Execute One Task at a Time
 
@@ -90,13 +105,17 @@ For each task:
    builder must stop and report rather than mechanically implement when a task
    needs a new premise, crosses an unplanned abstraction boundary, creates
    unexpected producer-consumer coupling, depends on incidental environment
-   state, or cannot leave the branch correct on its own.
+   state, adds validation that matches no actual consumer or distinct purpose,
+   or cannot leave the branch correct on its own.
 3. Inspect the returned delta and evidence. A task or PR is the smallest
    semantically complete, independently mergeable, independently verifiable
    unit; do not split only by file type, code layer, or a fixed template. Split
    or combine work only when the resulting units each preserve a clear
    invariant and do not rely on a future task to repair a known incomplete
-   state. Otherwise return to planning and approval.
+   state. Otherwise return to planning and approval. A feature normally uses
+   one PR for implementation, tests, current public descriptions, and
+   release-ready documentation. Treat post-merge defects as new corrective
+   work.
 4. Mark it `reviewing`. Select the smallest sufficient review charter for the
    change: implementation, final surface, integration, or another explicitly
    stated risk-based charter. Spawn a fresh `pbr-reviewer` with the
@@ -107,25 +126,39 @@ For each task:
    rerun validation, and use a fresh reviewer. On `BLOCKED`, obtain the missing
    evidence, capability, or user decision. Stop when the same blocker survives
    two review cycles.
-6. After `PASS`, rerun required validation and confirm the reviewed delta is
-   unchanged. Review any tracked output changed by validation.
+6. After `PASS`, confirm the reviewed delta and validation inputs are unchanged.
+   Reuse evidence with available command, result, provenance, and applicability.
+   Rerun only invalidated or charter-specific checks, and review changed tracked
+   output.
 7. Commit the accepted delta with its task ID, mark it `accepted`, and report
    the checkpoint and evidence.
 
+A material change invalidates `PASS`. A bounded finding fix that changes no
+scope, premise, or charter needs targeted validation and explicit closure
+against the new head; otherwise use a fresh reviewer.
+
+Reviewer independence means independent judgment, not automatic repetition of
+the builder's complete validation suite.
+
 ## 5. Integration Review
 
-1. After all tasks are accepted, run the complete validation suite.
-2. Spawn a fresh `pbr-reviewer` with the request, approved plan, ledger,
-   checkpoints, verdicts, validation evidence, repository instructions, and
-   full branch diff.
-3. Review cross-task behavior, cumulative acceptance criteria, scope, public
-   contracts, regressions, omitted requirements, and the chosen integration
-   charter. Trace material claims through user entry points, code paths,
-   outputs, tests, and public descriptions where applicable.
-4. Treat required fixes as a narrow task: build, validate, review, and
+1. After all tasks are accepted, decide whether a distinct integration gate
+   has a purpose not already covered by task review.
+2. For multiple tasks or real cross-task, cross-component, or cumulative risk,
+   run the relevant cumulative validation and spawn a fresh `pbr-reviewer`
+   with the request, approved plan, ledger, checkpoints, verdicts, evidence,
+   repository instructions, and full branch diff.
+3. For one task with no distinct integration risk, let its final task review
+   serve as cumulative review only when the charter explicitly covers the
+   complete base-to-head acceptance criteria. Do not repeat the same review
+   under a second label.
+4. Reuse applicable validation evidence. Run additional checks only for the
+   cumulative risk this gate is intended to cover.
+5. Treat required fixes as a narrow task: build, validate, review, and
    checkpoint it before repeating integration review.
 
-The approved work is complete only after `PASS`.
+The approved work is complete only after a cumulative `PASS`, whether supplied
+by the final task review or a distinct integration review.
 
 ## 6. Visibility
 
@@ -142,9 +175,18 @@ minute.
 
 ## 7. Publication Gate
 
-Before requesting publication approval, confirm that all tasks and integration
-review passed, required validation is green, the branch contains only accepted
-work, and PR or release prerequisites are available.
+Before requesting publication approval, confirm the required cumulative review
+passed, validation is green, the branch contains only accepted work, and PR or
+release prerequisites are available.
+
+Keep release-ready repository documentation durable enough that publication
+state can be owned by the release platform. Publication alone does not justify
+a follow-up closeout PR.
+
+At release, validate the delivered object instead of repeating earlier gates.
+For a source-only release, verify the tag target, release metadata, and source
+archive. Run tag CI only for tag-specific execution, assets, signing, or other
+new coverage.
 
 Summarize the outcome, checkpoints, tests, final verdict, non-blocking notes,
 and working-tree state. Ask before pushing or opening a draft pull request.

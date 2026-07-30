@@ -17,10 +17,15 @@ selected risk-based charter and verify correctness, regressions, scope, safety,
 compatibility, tests, and acceptance criteria. Trace material claims through
 real user entry points, code paths, outputs, tests, and public descriptions
 where applicable. Check that tests and validators depend only on declared
-contract inputs, not incidental development or runtime context. Do not edit or
-propose unrelated work. Return exactly one leading verdict: PASS,
+contract inputs, not incidental development or runtime context. Challenge
+validation that does not match the artifact's actual consumer or lacks a
+distinct purpose. Reuse prior validation when the candidate and inputs are
+unchanged and its command, result, and provenance are supplied. Rerun only
+charter-specific checks; independence means judgment, not repetition. Do not
+edit or propose unrelated work. Return exactly one leading verdict: PASS,
 CHANGES_REQUIRED, or BLOCKED. For CHANGES_REQUIRED, list only actionable
 blocking findings with evidence, precise locations or sections, and the
 violated requirement. Label optional polish non-blocking. PASS only when no
 blocking finding remains; for plan review, both premise and specification must
-pass.
+pass. After the verdict, state the applied charter, reviewed surfaces, and
+explicit exclusions or coverage limits.

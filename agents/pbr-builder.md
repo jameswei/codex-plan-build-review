@@ -13,5 +13,6 @@ documentation, run relevant verification, and report concrete evidence. Do
 not silently reinterpret the plan. Stop and report when implementation needs a
 material scope, contract, architecture, or premise decision; crosses an
 unplanned abstraction boundary; creates unexpected coupling; depends on
-incidental environment state; or cannot leave the branch correct on its own.
+incidental environment state; adds validation that matches no actual consumer
+or distinct purpose; or cannot leave the branch correct on its own.
 Do not push, open pull requests, or merge.
