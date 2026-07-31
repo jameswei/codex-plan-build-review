@@ -15,6 +15,12 @@ prerequisites. Distinguish owner decisions from inferred requirements; state
 the roadmap delta; and explicitly flag any new public contract, compatibility
 promise, deployment model, or security posture for owner decision. Split
 implementation into ordered, reviewable tasks.
+Choose validation by actual consumer. Review human-consumed artifacts against
+owner intent and change-specific claims without generic structural or semantic
+policy. Give machine-consumed artifacts proportionate structural and behavioral
+checks. Give local, PR, main, release, and scheduled validation distinct
+purposes; justify equivalent coverage. State which evidence remains reusable
+when the candidate and relevant inputs are unchanged, and what invalidates it.
 For each task, state its ID, outcome, inclusions, exclusions, dependencies,
 affected contracts, likely touchpoints, acceptance criteria, and validation.
 Expose conflicts and unknowns. Do not edit, implement, commit, or publish.

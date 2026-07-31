@@ -17,14 +17,16 @@ with both [Codex](https://developers.openai.com/codex/) and
   checkpoint commit.
 - Every review pass uses a fresh reviewer and a risk-based charter, not a
   generic checklist.
-- A final integration review checks cumulative behavior and cross-task
-  contracts.
+- Validation follows the artifact's real consumer, and local and remote gates
+  must have distinct purposes.
+- A distinct integration review checks cumulative behavior when cross-task
+  risk warrants it.
 - Publication requires explicit approval, and the workflow never merges
   automatically.
 
 ```text
 preflight → plan → review → approve → build task → review task → checkpoint
-          → repeat → integration review → publication approval
+          → repeat → integration review when needed → publication approval
 ```
 
 Each role receives a short decision summary plus the plan and evidence needed
@@ -51,7 +53,7 @@ clear escalation path while the main agent maintains the whole outcome.
 | `pbr-explorer` | Bounded investigation | Read only | Terra · medium | Haiku |
 | `pbr-planner` | Minimal, decision-complete plan | Read only | Sol · xhigh | Opus · xhigh |
 | `pbr-builder` | One approved task | Workspace write | Sol · medium | Sonnet · high |
-| `pbr-reviewer` | Premise, plan, task, and integration review | Read only | Sol · high | Opus · high |
+| `pbr-reviewer` | Premise, plan, task, and risk-based integration review | Read only | Sol · high | Opus · high |
 
 The role definitions are bundled and can be tuned for either runtime. Haiku
 doesn't support a configurable reasoning-effort level, so the Claude column
@@ -63,12 +65,34 @@ Plan review has two required judgments. The premise review challenges the
 purpose, target user, architecture, deployment model, compatibility posture,
 security posture, and roadmap delta. The specification review checks whether
 the chosen plan is complete and executable. A plan passes only when both pass.
+Plan bytes pass mechanical hygiene checks before hashing; a proven byte-only
+fix needs only focused re-review and a newly approved hash, while a semantic
+revision returns to full review.
 
 For implementation work, the main agent selects the smallest sufficient review
 charter: for example, implementation behavior, a final public surface, or
 cross-task integration. A task must be a semantically complete unit that can be
 merged and verified on its own. The workflow does not split work mechanically
-by file type or code layer.
+by file type or code layer. Each verdict also states its charter, reviewed
+surfaces, and coverage limits. One complete task review may also be the final
+cumulative review when no distinct integration risk exists. A feature normally
+keeps implementation, tests, current public descriptions, and release-ready
+documentation in one PR; publication alone does not require a closeout PR.
+
+## Validation model
+
+The workflow asks who consumes an artifact before choosing its checks.
+Review human-consumed artifacts against owner intent and change-specific
+claims, without generic structural or semantic policy. Use only
+change-relevant mechanical checks. Give machine-consumed artifacts
+proportionate structural and behavioral checks.
+
+Local, PR, main, release, and scheduled gates serve different purposes. The
+plan must explain equivalent coverage rather than repeat expensive checks by
+default. Evidence remains reusable while the candidate and relevant inputs are
+unchanged; reviewer independence does not require repeating the builder's full
+suite. Source-only releases verify the tag, release metadata, and archive, and
+add tag CI only for tag-specific behavior or artifacts.
 
 ## Install
 
