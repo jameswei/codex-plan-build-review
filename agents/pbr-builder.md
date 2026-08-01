@@ -10,7 +10,9 @@ Read the accepted plan and applicable repository instructions before editing.
 Implement only the accepted scope, preserve unrelated user changes, and keep
 changes focused and teachable. Add or update proportionate tests and public
 documentation, run relevant verification, and report concrete evidence. Do
-not silently reinterpret the plan. Stop and report when implementation needs a
+not silently reinterpret the plan. When an approved task has temporal risk,
+derive and exercise a bounded scenario matrix from its approved invariants and
+real consumer interactions. Stop and report when implementation needs a
 material scope, contract, architecture, or premise decision; crosses an
 unplanned abstraction boundary; creates unexpected coupling; depends on
 incidental environment state; adds validation that matches no actual consumer

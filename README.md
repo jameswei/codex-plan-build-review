@@ -71,13 +71,17 @@ revision returns to full review.
 
 For implementation work, the main agent selects the smallest sufficient review
 charter: for example, implementation behavior, a final public surface, or
-cross-task integration. A task must be a semantically complete unit that can be
-merged and verified on its own. The workflow does not split work mechanically
-by file type or code layer. Each verdict also states its charter, reviewed
-surfaces, and coverage limits. One complete task review may also be the final
-cumulative review when no distinct integration risk exists. A feature normally
-keeps implementation, tests, current public descriptions, and release-ready
-documentation in one PR; publication alone does not require a closeout PR.
+cross-task integration. For work with asynchronous, concurrent, polling, or
+other time-sensitive coordination, the plan states temporal invariants and
+consumer-observable behavior; implementation and review then use a bounded
+scenario matrix derived from them. A task must be a semantically complete unit
+that can be merged and verified on its own. The workflow does not split work
+mechanically by file type or code layer. Each verdict also states its charter,
+reviewed surfaces, and coverage limits. One complete task review may also be
+the final cumulative review when no distinct integration risk exists. A feature
+normally keeps implementation, tests, current public descriptions, and
+release-ready documentation in one PR; publication alone does not require a
+closeout PR.
 
 ## Validation model
 

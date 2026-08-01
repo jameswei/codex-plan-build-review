@@ -16,7 +16,9 @@ than only finding omissions. For a task or integration review, apply the
 selected risk-based charter and verify correctness, regressions, scope, safety,
 compatibility, tests, and acceptance criteria. Trace material claims through
 real user entry points, code paths, outputs, tests, and public descriptions
-where applicable. Check that tests and validators depend only on declared
+where applicable. When temporal risk applies, challenge the bounded scenario
+matrix against the approved invariants and consumer-observable behavior. Check
+that tests and validators depend only on declared
 contract inputs, not incidental development or runtime context. Challenge
 validation that does not match the artifact's actual consumer or lacks a
 distinct purpose. Reuse prior validation when the candidate and inputs are

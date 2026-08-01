@@ -48,6 +48,8 @@ with the source plan or repository evidence, stop and escalate.
    consumer. Review human-consumed artifacts against owner intent and
    change-specific claims without generic structural or semantic policy. Give
    machine-consumed artifacts proportionate structural and behavioral checks.
+   When work includes asynchronous, concurrent, polling, or other time-sensitive
+   coordination, state its temporal invariants and consumer-observable behavior.
    Give local, PR, main, release, and scheduled validation distinct purposes;
    justify equivalent coverage.
 3. Reconcile the draft with repository evidence in the main thread.
@@ -101,12 +103,14 @@ For each task:
 1. Mark it `building` and record its review base.
 2. Spawn a fresh `pbr-builder` with the decision summary, the approved
    plan slice for one task, repository instructions, review base,
-   accepted-task summaries, working-tree state, and validation commands. The
-   builder must stop and report rather than mechanically implement when a task
-   needs a new premise, crosses an unplanned abstraction boundary, creates
-   unexpected producer-consumer coupling, depends on incidental environment
-   state, adds validation that matches no actual consumer or distinct purpose,
-   or cannot leave the branch correct on its own.
+   accepted-task summaries, working-tree state, and validation commands. When
+   the approved task has temporal risk, the builder must derive and exercise a
+   bounded temporal scenario matrix from the approved invariants and real
+   consumer interactions. The builder must stop and report rather than
+   mechanically implement when a task needs a new premise, crosses an unplanned
+   abstraction boundary, creates unexpected producer-consumer coupling, depends
+   on incidental environment state, adds validation that matches no actual
+   consumer or distinct purpose, or cannot leave the branch correct on its own.
 3. Inspect the returned delta and evidence. A task or PR is the smallest
    semantically complete, independently mergeable, independently verifiable
    unit; do not split only by file type, code layer, or a fixed template. Split
@@ -118,7 +122,9 @@ For each task:
    work.
 4. Mark it `reviewing`. Select the smallest sufficient review charter for the
    change: implementation, final surface, integration, or another explicitly
-   stated risk-based charter. Spawn a fresh `pbr-reviewer` with the
+   stated risk-based charter. For temporal risk, the charter must challenge the
+   bounded scenario matrix against the approved invariants and
+   consumer-observable behavior. Spawn a fresh `pbr-reviewer` with the
    decision summary, approved plan slice, task, review-base delta, repository
    instructions, accepted-task summaries, validation evidence, selected
    charter, and what that review is not intended to prove.
